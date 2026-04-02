@@ -1,3 +1,5 @@
+
+use multi_threaded_inventory_manager::run;
 fn main() {
-    println!("Hello, world!");
+    run();
 }
