@@ -3,7 +3,7 @@ mod constants;
 use std::{
     collections::HashMap,
     sync::{Arc, Mutex},
-    thread::{self, JoinHandle, ThreadId},
+    thread::{self, JoinHandle},
 };
 
 use crate::constants::THREAD_COUNT;
