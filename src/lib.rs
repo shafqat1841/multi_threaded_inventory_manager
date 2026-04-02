@@ -23,17 +23,20 @@ pub fn run() {
 
         let handler = thread::spawn(move || {
             let mut all_items = all_items_clone.lock().unwrap();
-            // let laptop_count = all_items.get_mut("Laptops").unwrap();
-            // *laptop_count -= 1;
-            // let phone_count = all_items.get_mut("Phones").unwrap();
-            // *phone_count -= 1;
-
-            for (item, count) in all_items.iter_mut() {
-                if item == &"Laptops" || item == &"Phones" {
-                    println!("Thread {:?} is updating {} count", thread::current().id(), item);
-                }
-                *count -= 1;
+            {
+                let laptop_count = all_items.entry("Laptops").or_insert(0);
+                *laptop_count -= 1;
             }
+            {
+                let phone_count = all_items.entry("Phones").or_insert(0);
+                *phone_count -= 1;
+            }
+            println!(
+                "Thread: {:?}, laptop count: {:?}, phone count: {:?}",
+                thread::current().id(),
+                all_items["Laptops"],
+                all_items["Phones"]
+            );
         });
 
         handlers.push(handler);
