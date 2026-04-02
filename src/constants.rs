@@ -1,1 +1,1 @@
-pub const HELLO: &str = "Hello, world!";
+pub const THREAD_COUNT: usize = 10;
